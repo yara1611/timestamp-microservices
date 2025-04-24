@@ -28,20 +28,24 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?",(req,res)=>{
   date = req.params.date;
-  let isValid = Date.parse(date); 
+  let isValid = new Date(date)
+  
   let isEmpty = date==""||date==null
   if(isValid)
   {
-    var utcFlag = checkDate(date)
+  var utcFlag = checkDate(date)
   if(utcFlag)
     res.json({"utc": new Date(date).toUTCString()})
   else
+    console.log({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
     res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
   }
   else if(isEmpty){
     res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
   }
   else{
+    console.log("Invalid Date "+ isValid)
+    console.log("Valid Date "+ Date.parse(date))
     res.json({"error":"Invalid Date"})
   }
 })
