@@ -41,10 +41,10 @@ console.log('log: isValid: '+ isValid+' Date: '+date)
   console.log("date is valid")
   var utcFlag = checkDate(date)
   if(utcFlag){
-    console.log('im in the utc part'+ ' utc: '+ new Date(date.toString()).toUTCString())
+    console.log('im in the utc part'+ ' utc: '+ new Date(0).toUTCString())
     console.log("Parsed date:", new Date(0).toUTCString());
 
-    res.json({utc: new Date(parseInt(date)).toUTCString()})
+    res.json({utc: new Date(0).toUTCString()})
   }
   else{
     res.json({unix: new Date(date).getTime(), utc: new Date(date).toUTCString()})
