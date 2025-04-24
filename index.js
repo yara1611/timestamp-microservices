@@ -42,7 +42,7 @@ console.log('log: isValid: '+ isValid+' Date: '+date)
   var utcFlag = checkDate(date)
   if(utcFlag){
     console.log('im in the utc part'+ ' utc: '+ new Date(date.toString()).toUTCString())
-    console.log("Parsed date:", new Date(date).toUTCString());
+    console.log("Parsed date:", new Date(0).toUTCString());
 
     res.json({utc: new Date(parseInt(date)).toUTCString()})
   }
