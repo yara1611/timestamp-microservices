@@ -36,7 +36,7 @@ app.get("/api/:date?",(req,res)=>{
     return res.json({unix: now.getTime(), utc :now.toUTCString()})
   }
 
-  if(!isValid)
+  if(isValid)
   {
   var utcFlag = checkDate(date)
   if(utcFlag){
