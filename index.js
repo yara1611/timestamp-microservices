@@ -29,7 +29,7 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date?",(req,res)=>{
   let date = req.params.date;
   let isValid = !isNaN(date)
-console.log('log: '+ isValid)
+console.log('log: '+ isValid+' '+date)
   if(!date)
   {
     let now = new Date()
@@ -40,7 +40,6 @@ console.log('log: '+ isValid)
   {
   var utcFlag = checkDate(date)
   if(utcFlag){
-    console.log('log: '+ isValid)
     res.json({utc: new Date(parseInt(date)).toUTCString()})
   }
   else{
