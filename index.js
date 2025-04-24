@@ -33,11 +33,11 @@ app.get("/api/:date?", (req, res) => {
     return res.json({ unix: now.getTime(), utc: now.toUTCString() });
   }
   var utcFlag = /^\d+$/.test(date);
-  
+  let parsedDate
   if(utcFlag){
-    let parsedDate= new Date(0)
+     parsedDate= new Date(0)
   }else{
-  let parsedDate = new Date(date)
+   parsedDate = new Date(date)
   }
   
   let isValid = !isNaN(parsedDate);
