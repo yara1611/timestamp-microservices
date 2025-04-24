@@ -40,7 +40,7 @@ app.get("/api/:date?",(req,res)=>{
   {
   var utcFlag = checkDate(date)
   if(utcFlag){
-    console.log('log: '+ new Date(parseInt(date)).toUTCString())
+    console.log('log: '+ isValid)
     res.json({utc: new Date(parseInt(date)).toUTCString()})
   }
   else{
