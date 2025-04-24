@@ -46,7 +46,7 @@ app.get("/api/:date?", (req, res) => {
     if (utcFlag) {
       res.json({ utc: parsedDate.toUTCString() });
     } else {
-      console.log(parsedDate.getTime()+', '+parsedDate.toUTCString())
+      console.log(date.toString()+' '+parsedDate.getTime()+', '+parsedDate.toUTCString())
       res.json({
         unix: parsedDate.getTime(),
         utc: parsedDate.toUTCString(),
