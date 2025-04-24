@@ -48,7 +48,7 @@ app.get("/api/:date?",(req,res)=>{
   else{
     console.log("Invalid Date "+ isValid)
     console.log("Valid Date "+ Date.parse(date))
-    res.json({"error":"Invalid Date"})
+    res.json({error :"Invalid Date"})
   }
 })
 
