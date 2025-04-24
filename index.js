@@ -28,7 +28,7 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?",(req,res)=>{
   let date = req.params.date;
-  let isValid = new Date(date)
+  let isValid = !isNaN(new Date(date))
 console.log('log: '+ isValid+' '+date)
   if(!date)
   {
