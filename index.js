@@ -31,6 +31,14 @@ app.get("/api/:date?",(req,res)=>{
   let isValid = !isNaN(new Date(date))
   
   let isEmpty = date==""||date==null
+
+  if
+  (isEmpty)
+  {
+    now = new Date()
+    return res.json({"unix":now.getTime(),"utc":now.toUTCString()})
+  }
+
   if(isValid)
   {
   var utcFlag = checkDate(date)
@@ -39,9 +47,6 @@ app.get("/api/:date?",(req,res)=>{
   else
     console.log({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
     res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
-  }
-  else if(isEmpty){
-    res.json({"unix": new Date(),"utc": new Date(parseInt(date)).toUTCString()})
   }
   else{
     console.log("Invalid Date "+ isValid)
