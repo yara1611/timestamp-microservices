@@ -26,36 +26,35 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", (req, res) => {
   let date = req.params.date;
-  
-  
+
   if (!date) {
     let now = new Date();
     return res.json({ unix: now.getTime(), utc: now.toUTCString() });
   }
   var utcFlag = /^\d+$/.test(date);
-  let parsedDate
-  if(utcFlag){
-     parsedDate= new Date(0)
-  }else{
-   parsedDate = new Date(date)
-  }
-  
-  let isValid = !isNaN(parsedDate);
-  //console.log("log: isValid: " + isValid + " Date: " + date);
-  if (isValid) {
-    if (utcFlag) {
-      res.json({ utc: parsedDate.toUTCString() });
-    } else {
-      console.log(date.toString()+' '+parsedDate.getTime()+', '+parsedDate.toUTCString())
-      res.json({
-        unix: parsedDate.getTime(),
-        utc: parsedDate.toUTCString(),
-      });
-    }
+  let parsedDate;
+  if (!utcFlag) {
+    console.log("utc: " + date);
+    parsedDate = new Date(0);
   } else {
-    console.log("log: error");
-    res.json({ error: "Invalid Date" });
+    console.log("unix: " + date);
+    parsedDate = new Date(parseInt(date));
   }
+
+  let isValid = !isNaN(parsedDate.getTime());
+  console.log(isValid+' '+parsedDate)
+  
+  if (!isValid) return res.json({ error: "Invalid Date" });
+  
+  console.log("log: isValid: " + isValid + " Date: " + date);
+  console.log(date.toString() +
+      " " +parsedDate.getTime() +
+      ", " +parsedDate.toUTCString());
+  
+  res.json({
+    unix: parsedDate.getTime(),
+    utc: parsedDate.toUTCString(),
+  });
 });
 
 // Listen on port set in environment variable or default to 3000
