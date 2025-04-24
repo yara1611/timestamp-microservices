@@ -33,7 +33,7 @@ app.get("/api/:date?",(req,res)=>{
   if(!date)
   {
     now = new Date()
-    return res.json({utc :now.toUTCString()})
+    return res.json({unix: new Date(date).getTime(), utc :now.toUTCString()})
   }
 
   if(isValid)
@@ -42,12 +42,12 @@ app.get("/api/:date?",(req,res)=>{
   if(utcFlag)
     res.json({"utc": new Date(date).toUTCString()})
   else
-    console.log({"unix": new Date(date).getTime(),"utc": new Date(date).toUTCString()})
+    //console.log({"unix": new Date(date).getTime(),"utc": new Date(date).toUTCString()})
     res.json({"unix": new Date(date).getTime(),"utc": new Date(date).toUTCString()})
   }
   else{
-    console.log("Invalid Date "+ isValid)
-    console.log("Valid Date "+ Date.parse(date))
+   // console.log("Invalid Date "+ isValid)
+    //console.log("Valid Date "+ Date.parse(date))
     res.json({error :"Invalid Date"})
   }
 })
