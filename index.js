@@ -1,3 +1,4 @@
+
 // index.js
 // where your node app starts
 
@@ -8,6 +9,7 @@ var app = express();
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
+const { process_params } = require('express/lib/router');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
@@ -24,7 +26,33 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/:date?",(req,res)=>{
+  date = req.params.date;
+  let isValid = Date.parse(date); 
+  let isEmpty = date==""||date==null
+  if(isValid)
+  {
+    var utcFlag = checkDate(date)
+  if(utcFlag)
+    res.json({"utc": new Date(date).toUTCString()})
+  else
+    res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
+  }
+  else if(isEmpty){
+    res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
+  }
+  else{
+    res.json({"error":"Invalid Date"})
+  }
+})
 
+function checkDate(date){
+  if(date.includes('-')){
+     return true
+  }
+  else
+    return false
+}
 
 // Listen on port set in environment variable or default to 3000
 var listener = app.listen(process.env.PORT || 3000, function () {
