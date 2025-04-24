@@ -49,7 +49,7 @@ app.get("/api/:date?", (req, res) => {
       console.log("yes it is valid");
       if (new Date(date).getTime()) {
         console.log("utc: " + parsedDate.toUTCString());
-        return res.json({utc : parsedDate.toUTCString()})
+        return res.json({utc : new Date(0)})
       } else {
         console.log("unix: " + date + ", utc: " + parsedDate.toUTCString());
         return res.json({unix:new Date(parseInt(date)).getTime(), utc : parsedDate.toUTCString()})
