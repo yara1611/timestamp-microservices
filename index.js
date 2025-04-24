@@ -40,7 +40,7 @@ app.get("/api/:date?",(req,res)=>{
   {
   var utcFlag = checkDate(date)
   if(utcFlag){
-    console.log(new Date(parseInt(date)).toUTCString())
+    console.log('log: '+ new Date(parseInt(date)).toUTCString())
     res.json({utc: new Date(parseInt(date)).toUTCString()})
   }
   else{
@@ -48,7 +48,7 @@ app.get("/api/:date?",(req,res)=>{
   }
   }
   else{
-   
+     console.log('log: '+ new Date(parseInt(date)).toUTCString())
     res.json({error :"Invalid Date"})
   }
 })
