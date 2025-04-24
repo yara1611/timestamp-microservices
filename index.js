@@ -26,22 +26,29 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", (req, res) => {
   let date = req.params.date;
-  let isValid = !isNaN(new Date(date));
+  
   console.log("log: isValid: " + isValid + " Date: " + date);
   if (!date) {
     let now = new Date();
     return res.json({ unix: now.getTime(), utc: now.toUTCString() });
   }
-
+  var utcFlag = /^\d+$/.test(date);
+  let parsedDate=''
+  
+  if(utcFlag){
+    parsedDate= new Date(0)
+  }else{
+  parsedDate = new Date(date)
+  }
+  let isValid = !isNaN(parsedDate);
   if (isValid) {
     console.log("date is valid");
-    var utcFlag = /^\d+$/.test(date);
     if (utcFlag) {
-      res.json({ utc: new Date(0).toUTCString() });
+      res.json({ utc: parsedDate.toUTCString() });
     } else {
       res.json({
-        unix: new Date(date).getTime(),
-        utc: new Date(date).toUTCString(),
+        unix: parsedDate.getTime(),
+        utc: parsedDate.toUTCString(),
       });
     }
   } else {
