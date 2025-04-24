@@ -33,7 +33,7 @@ app.get("/api/:date?",(req,res)=>{
   if(!date)
   {
     now = new Date()
-    return res.json({unix: now.getTime(),utc :now.toUTCString()})
+    return res.json({utc :now.toUTCString()})
   }
 
   if(isValid)
