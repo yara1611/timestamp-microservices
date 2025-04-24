@@ -40,10 +40,10 @@ app.get("/api/:date?",(req,res)=>{
   {
   var utcFlag = checkDate(date)
   if(utcFlag)
-    res.json({"utc": new Date(parseInt(date)).toUTCString()})
+    res.json({utc: new Date(parseInt(date)).toUTCString()})
   else
     //console.log({"unix": new Date(date).getTime(),"utc": new Date(date).toUTCString()})
-    res.json({"unix": new Date(date).getTime(),"utc": new Date(date).toUTCString()})
+    res.json({unix: new Date(date).getTime(),"utc": new Date(date).toUTCString()})
   }
   else{
    
