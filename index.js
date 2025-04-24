@@ -29,11 +29,8 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date?",(req,res)=>{
   date = req.params.date;
   let isValid = !isNaN(new Date(date))
-  
-  let isEmpty = date==""||date==null
 
-  if
-  (isEmpty)
+  if(!date)
   {
     now = new Date()
     return res.json({"unix":now.getTime(),"utc":now.toUTCString()})
