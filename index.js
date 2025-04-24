@@ -39,7 +39,7 @@ console.log('log: isValid: '+ isValid+' Date: '+date)
   if(isValid)
   {
   console.log("date is valid")
-  var utcFlag = checkDate(date)
+  var utcFlag = /^\d+$/.test(date)
   if(utcFlag){
     console.log('im in the utc part'+ ' utc: '+ new Date(0).toUTCString())
     console.log("Parsed date:", new Date(0).toUTCString());
@@ -56,13 +56,7 @@ console.log('log: isValid: '+ isValid+' Date: '+date)
   }
 })
 
-function checkDate(date){
-  if(date.includes('-')){
-     return true
-  }
-  else
-    return false
-}
+
 
 // Listen on port set in environment variable or default to 3000
 var listener = app.listen(process.env.PORT || 3000, function () {
