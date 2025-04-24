@@ -41,7 +41,7 @@ app.get("/api/:date?",(req,res)=>{
     res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
   }
   else if(isEmpty){
-    res.json({"unix": new Date(parseInt(date)).valueOf(),"utc": new Date(parseInt(date)).toUTCString()})
+    res.json({"unix": new Date(),"utc": new Date(parseInt(date)).toUTCString()})
   }
   else{
     console.log("Invalid Date "+ isValid)
