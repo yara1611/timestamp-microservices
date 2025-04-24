@@ -41,7 +41,7 @@ app.get("/api/:date?", (req, res) => {
   }
   
   let isValid = !isNaN(parsedDate);
-  console.log("log: isValid: " + isValid + " Date: " + date);
+  //console.log("log: isValid: " + isValid + " Date: " + date);
   if (isValid) {
     if (utcFlag) {
       res.json({ utc: parsedDate.toUTCString() });
