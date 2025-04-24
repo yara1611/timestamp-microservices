@@ -34,10 +34,10 @@ app.get("/api/:date?", (req, res) => {
   var utcFlag = /^\d+$/.test(date);
   let parsedDate;
   if (!utcFlag) {
-    console.log("utc: " + date);
+    
     parsedDate = new Date(0);
   } else {
-    console.log("unix: " + date);
+    
     parsedDate = new Date(parseInt(date));
   }
 
@@ -45,11 +45,6 @@ app.get("/api/:date?", (req, res) => {
   console.log(isValid+' '+parsedDate)
   
   if (!isValid) return res.json({ error: "Invalid Date" });
-  
-  console.log("log: isValid: " + isValid + " Date: " + date);
-  console.log(date.toString() +
-      " " +parsedDate.getTime() +
-      ", " +parsedDate.toUTCString());
   
   res.json({
     unix: parsedDate.getTime(),
