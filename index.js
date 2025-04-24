@@ -38,7 +38,7 @@ app.get("/api/:date?", (req, res) => {
     parsedDate = new Date(0);
   } else {
     
-    parsedDate = new Date(parseInt(date));
+    parsedDate = new Date(date);
   }
 
   let isValid = !isNaN(parsedDate.getTime());
