@@ -45,7 +45,7 @@ app.get("/api/:date?", (req, res) => {
     let parsedDate = new Date(parseInt(date));
     //valid or not
 
-    if (!isNaN(parsedDate)) {
+    if (!isNaN(parsedDate.getTime())) {
       console.log("yes it is valid");
       if (new Date(date).getTime()) {
         console.log("utc: " + parsedDate.toUTCString());
