@@ -25,39 +25,29 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date?", (req, res) => {
-  let date = req.params.date;
-  
-  if (!date) {
-    console.log("now- unix:  "+new Date().getTime()+", utc: "+new Date().toUTCString());
-    return res.json({unix:new Date().getTime(), utc:new Date().toUTCString()})
+  let dateInput = req.params.date;
+
+  let date;
+  if (!dateInput) {
+    date = new Date(); // current time
   } else {
-    
-    console.log(
-    date +
-      " " +
-      new Date(date).getTime() +
-      " " +
-      new Date(date).toUTCString() +
-      " " +
-      new Date(parseInt(date)).toUTCString()
-  );
-    
-    let parsedDate = new Date(parseInt(date));
-    //valid or not
-
-    if (!isNaN(parsedDate.getTime())) {
-      console.log("yes it is valid");
-      if (new Date(date).getTime()) {
-        console.log("utc: " + parsedDate.toUTCString());
-        return res.json({utc : new Date(0).toUTCString()})
-      } else {
-        console.log("unix: " + date + ", utc: " + parsedDate.toUTCString());
-        return res.json({unix:new Date(date), utc : new Date(date).toUTCString()})
-      }
-    } else return res.json({error:"Invalid Date"});
-
-    //check unix/utc
+    // Check if it's a valid Unix timestamp (number-only string)
+    if (/^\d+$/.test(dateInput)) {
+      date = new Date(parseInt(dateInput)); // interpret as milliseconds
+    } else {
+      date = new Date(dateInput); // try parsing date string
+    }
   }
+
+  // Check if the date is valid
+  if (date.toString() === "Invalid Date") {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  return res.json({
+    unix: date.getTime(),            // milliseconds since epoch
+    utc: date.toUTCString()         // formatted UTC string
+  });
 });
 
 
